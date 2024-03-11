@@ -1,7 +1,11 @@
-export default function DashboardPage() {
-    return (
-        <div>
-            <h1>Dashboard</h1>
-        </div>
-    );
+export default function DashboardPage({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+    </div>
+  );
 }
