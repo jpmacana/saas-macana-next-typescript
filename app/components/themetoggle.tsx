@@ -2,6 +2,7 @@
 
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
+import { GrSystem } from "react-icons/gr";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,15 +24,15 @@ export function ThemeToggle() {
           <span className="sr-only">Elegi el tema</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center">
+      <DropdownMenuContent align="center" sideOffset={5}>
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Claro
+          <SunIcon className="size-5 mx-auto" />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Oscuro
+          <MoonIcon className="size-5 mx-auto" />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          Sistema
+          <GrSystem className="size-5 mx-auto" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
