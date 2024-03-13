@@ -18,14 +18,22 @@ export const navItems = [
   { name: "Ajustes", href: "/dashboard/ajustes", icon: Settings },
   { name: "Billetera", href: "/dashboard/billetera", icon: CreditCard },
 ];
-export function UserNav() {
+export function UserNav({
+  name,
+  email,
+  image,
+}: {
+  name: string;
+  email: string;
+  image: string;
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative size-12 rounded-full">
           <Avatar className="size-12 rounded-full">
             <AvatarImage
-              src="https://github.com/jpmacana.png"
+              src={image}
               alt="avatar"
               height={500}
               width={500}
@@ -38,11 +46,9 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-2">
-            <p className="text-sm font-medium leading-none">
-              Juan Pablo Senatra
-            </p>
+            <p className="text-sm font-medium leading-none">{name}</p>
             <p className="text-sm leading-none text-muted-foreground">
-              jpsenatra@gmail.com
+              {email}
             </p>{" "}
           </div>
         </DropdownMenuLabel>

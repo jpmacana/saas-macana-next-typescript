@@ -1,4 +1,3 @@
-
 import { ThemeToggle } from "@/app/components/themetoggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,7 +25,11 @@ export async function Navbar() {
           <ThemeToggle />
 
           {(await isAuthenticated()) ? (
-            <UserNav />
+            <UserNav
+              email={user?.email as string}
+              image={user?.picture as string}
+              name={user?.given_name as string}
+            />
           ) : (
             <div className="flex items-center gap-x-5">
               <LoginLink>
