@@ -1,10 +1,12 @@
-
 import { ThemeProvider } from "@/app/components/theme-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
+
+import prisma from "@/lib/db";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,23 +15,39 @@ export const metadata: Metadata = {
   description: "Crea notas y agenda tus compras con MacanaSaas",
 };
 
-export default function RootLayout({
+async function getData(userId: string) {
+  const data = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      colorSchema: true,
+    },
+  });
+  return data;
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  const data = await getData(user?.id as string);
   return (
     <html lang="es">
-      <body className={inter.className}>
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar/>
-        {children}
-        </ThemeProvider></body>
+      <body className={`${inter.className} ${data?.colorSchema}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

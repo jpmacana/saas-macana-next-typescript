@@ -12,7 +12,7 @@ export const navItems = [
   },
   {
     name: "Ajustes",
-    href: "/dashboard/ajustes",
+    href: "/dashboard/settings",
     icon: Settings,
   },
   {
