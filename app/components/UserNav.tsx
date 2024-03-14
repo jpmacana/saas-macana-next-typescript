@@ -15,7 +15,7 @@ import Link from "next/link";
 
 export const navItems = [
   { name: "Home", href: "/dashboard", icon: Home },
-  { name: "Ajustes", href: "/dashboard/ajustes", icon: Settings },
+  { name: "Ajustes", href: "/dashboard/settings", icon: Settings },
   { name: "Billetera", href: "/dashboard/billetera", icon: CreditCard },
 ];
 export function UserNav({

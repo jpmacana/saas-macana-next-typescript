@@ -16,15 +16,17 @@ export const metadata: Metadata = {
 };
 
 async function getData(userId: string) {
-  const data = await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
-    select: {
-      colorSchema: true,
-    },
-  });
-  return data;
+  if (userId) {
+    const data = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        colorSchema: true,
+      },
+    });
+    return data;
+  }
 }
 
 export default async function RootLayout({
@@ -37,7 +39,7 @@ export default async function RootLayout({
   const data = await getData(user?.id as string);
   return (
     <html lang="es">
-      <body className={`${inter.className} ${data?.colorSchema}`}>
+      <body className={`${inter.className} ${data?.colorSchema ?? "theme-green"}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
