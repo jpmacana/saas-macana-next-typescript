@@ -17,7 +17,7 @@ export const navItems = [
   },
   {
     name: "Billetera",
-    href: "/dashboard/billetera",
+    href: "/dashboard/billing",
     icon: CreditCard,
   },
 ];
