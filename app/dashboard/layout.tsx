@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import prisma from "@/lib/db";
 import { stripe } from "@/lib/stripe";
+import {  unstable_noStore as noStore } from "next/cache";
 
 async function getData({
   email,
@@ -29,7 +30,7 @@ async function getData({
     },
   });
   if (!user) {
-    const name = `${firstName?? ''} ${lastName?? ""}`;
+    const name = `${firstName ?? ""} ${lastName ?? ""}`;
     await prisma.user.create({
       data: {
         id: id,
@@ -52,9 +53,7 @@ async function getData({
         stripeCustomerId: data.id,
       },
     });
-    
   }
-  
 }
 
 export default async function DashboardLayout({
@@ -62,6 +61,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 

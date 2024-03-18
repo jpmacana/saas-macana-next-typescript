@@ -23,15 +23,12 @@ export default async function Home() {
             Crea notas facilmente
           </h1>
           <p className="mt-12 text-base font-serif tracking-tight text-foreground sm:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-            itaque explicabo deleniti veritatis iste eius ut quisquam vero!
-            Labore, vitae. Placeat harum obcaecati officiis tempora fuga ad
-            sequi exercitationem autem.
+            Crea tus notas y recordatorios de forma sencilla, ademas de tus compras, citas y mucho mas
           </p>
           <div className="flex justify-center max-w-xs mx-auto mt-12">
             <RegisterLink>
               <Button size={"lg"} className="w-full">
-                Registrate gratis!
+                Registrate!
               </Button>
             </RegisterLink>
           </div>

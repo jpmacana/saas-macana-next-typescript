@@ -15,10 +15,10 @@ import Link from "next/link";
 import prisma from "@/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
-
+import { revalidatePath,unstable_noStore as noStore } from "next/cache";
 
 async function getData({ userId, noteId }: { userId: string; noteId: string }) {
-
+    noStore();
   const data = await prisma.note.findUnique({
     where: {
       id: noteId,
@@ -39,6 +39,7 @@ export default async function DynamicRoute({
 }: {
   params: { id: string };
 }) {
+ 
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const data = await getData({ userId: user?.id as string, noteId: params.id });
@@ -62,8 +63,6 @@ export default async function DynamicRoute({
       },
     });
 
-    
-
     return redirect("/dashboard");
   }
   return (
@@ -71,9 +70,7 @@ export default async function DynamicRoute({
       <form action={postData}>
         <CardHeader>
           <CardTitle>Edita tus notas</CardTitle>
-          <CardDescription>
-           Aqui podes editar tus notas...😊
-          </CardDescription>
+          <CardDescription>Aqui podes editar tus notas...😊</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-y-5">
           <div className="gap-y-2 flex flex-col">

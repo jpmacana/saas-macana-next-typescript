@@ -6,18 +6,20 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getStripeSession,stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import { StripePortal, StripeSubscriptionCreationButton } from "@/app/components/SubmitButtons";
+import {unstable_noStore as noStore} from 'next/cache'
 
 const featureItems = [
-  { name: "Lorem ipsum" },
-  { name: "Lorem ipsum" },
-  { name: "Lorem ipsum" },
-  { name: "Lorem ipsum" },
-  { name: "Lorem ipsum" },
-  { name: "Lorem ipsum" },
+  { name: "Acceso global: Los clientes pueden acceder al sistema desde cualquier lugar." },
+  { name: "Escalabilidad instantánea: Los clientes pueden aumentar o reducir recursos según sus necesidades sin interrupciones." },
+  { name: "Actualizaciones automáticas: El proveedor se encarga de mantener y actualizar el software." },
+  { name: "Mantenimiento simplificado: Elimina la necesidad de gestionar infraestructura loca" },
+  { name: "Modelo de precios flexible: Los clientes pagan una tarifa regular por el uso del software" },
+  { name: "Acceso a la documentación: Los clientes pueden acceder a la documentación de la aplicación" },
 ];
 
 
 async function getData(userId: string) {
+  noStore();
   const data = await prisma.subscription.findUnique({
     where: {
       userId: userId,
@@ -78,19 +80,19 @@ if (data?.status === 'active') {
     <div className="grid items-start gap-8">
     <div className="flex items-center justify-between px-2">
       <div className="grid gap-1">
-        <h1 className="text-3xl md:text-4xl ">Subscription</h1>
+        <h1 className="text-3xl md:text-4xl ">Subscripcion</h1>
         <p className="text-lg text-muted-foreground">
-          Settings reagding your subscription
+          Ajustes de su facturacion
         </p>
       </div>
     </div>
     <Card className="w-full lg:w-2/3">
           <CardHeader>
-            <CardTitle>Edit Subscription</CardTitle>
+            <CardTitle>Editar Subscripcion</CardTitle>
             <CardDescription>
-              Click on the button below, this will give you the opportunity to
-              change your payment details and view your statement at the same
-              time.
+            Haga clic en el botón de abajo, esto le dará la oportunidad de
+              cambie sus datos de pago y vea su estado de cuenta al mismo tiempo
+              tiempo.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -115,12 +117,12 @@ if (data?.status === 'active') {
           </div>
 
           <div className=" mt-4 items-baseline text-6xl font-extrabold flex">
-            $30{" "}
+            $5{" "}
             <span className="ml-1 text-2xl text-muted-foreground">/ mes</span>
           </div>
           <p className="mt-5 text-muted-foreground text-sm">
             Escribe tantas notas como quieras por
-            <span className="ml-1 text-sm text-primary"> $30 /mes</span>
+            <span className="ml-1 text-sm text-primary"> $5 /mes</span>
           </p>
         </CardContent>
         <div className="flex-1 flex flex-col justify-between px-6 pt-6 pb-8 bg-secondary rounded-lg m-1 space-y-6 sm:p-10 sm:pt-6">
